@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-class AppTest {
-    private App app = new App();
+class CalibrationSolverTest {
+    private final CalibrationSolver app = new CalibrationSolver();
 
     @Test
     void linesAreRead() throws IOException, URISyntaxException {
-        List<String> lines = app.readFile();
+        List<String> lines = app.readFileByLine("day1.txt");
         assertFalse(lines.isEmpty());
         assertEquals(lines.size(), 1000);
         assertEquals(lines.get(0), "9cbncbxclbvkmfzdnldc");
@@ -33,5 +33,17 @@ class AppTest {
         assertEquals(88, app.getSimpleNumberFromLine(line2));
         assertEquals(45, app.getSimpleNumberFromLine(line3));
         assertEquals(-1, app.getSimpleNumberFromLine(invalid));
+    }
+
+    @Test
+    void complexNumberIsFound() {
+
+        String line1 = "9cbncbxclbvkmfzdnldc";
+        String line2 = "five8mpkpdfiveeightfourseven";
+        String line3 = "two45";
+
+        assertEquals(99, app.getComplexNumberFromLine(line1));
+        assertEquals(57, app.getComplexNumberFromLine(line2));
+        assertEquals(25, app.getComplexNumberFromLine(line3));
     }
 }
