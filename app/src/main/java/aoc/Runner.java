@@ -41,6 +41,8 @@ public class Runner {
 
     private static void solveDay4() throws IOException, URISyntaxException {
         ScratchCardSolver solver = new ScratchCardSolver();
-        System.out.println("solver.countCards() = " + solver.countCards());
+        var lines = solver.readFileByLine("day4.txt");
+        System.out.println("solver.countCards() = " + solver.countCards(lines));
+        System.out.println("solver.playTheRealGame(lines) = " + solver.playTheRealGame(lines));
     }
 }

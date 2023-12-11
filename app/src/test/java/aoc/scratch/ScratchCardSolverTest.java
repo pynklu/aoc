@@ -1,6 +1,8 @@
 package aoc.scratch;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -16,7 +18,7 @@ class ScratchCardSolverTest {
     );
 
     @Test
-    void testValueCalculator() {
+    void testValueCalculator() throws IOException, URISyntaxException {
         ScratchCardSolver solver = new ScratchCardSolver();
         assertThat(solver.parseLine(mockInput.get(0)).getValue()).isEqualTo(8);
         assertThat(solver.parseLine(mockInput.get(1)).getValue()).isEqualTo(2);
@@ -24,9 +26,12 @@ class ScratchCardSolverTest {
         assertThat(solver.parseLine(mockInput.get(3)).getValue()).isEqualTo(1);
         assertThat(solver.parseLine(mockInput.get(4)).getValue()).isEqualTo(0);
         assertThat(solver.parseLine(mockInput.get(5)).getValue()).isEqualTo(0);
-        var total = mockInput.stream().map(solver::parseLine)
-                .mapToDouble(ScratchCard::getValue)
-                .sum();
-        assertThat(total).isEqualTo(13);
+        assertThat(solver.countCards(mockInput)).isEqualTo(13);
+    }
+
+    @Test
+    void testRealGame() {
+        ScratchCardSolver solver = new ScratchCardSolver();
+        assertThat(solver.playTheRealGame(mockInput)).isEqualTo(30);
     }
 }

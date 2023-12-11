@@ -25,10 +25,18 @@ public class ScratchCardSolver extends Solver {
         return Arrays.stream(s.strip().split("\\s+")).map(Integer::parseInt).toList();
     }
 
-    public double countCards() throws IOException, URISyntaxException {
-        return readFileByLine("day4.txt").stream()
+    public double countCards(List<String> inputLines) throws IOException, URISyntaxException {
+        return inputLines.stream()
                 .map(this::parseLine)
                 .mapToDouble(ScratchCard::getValue)
                 .sum();
+    }
+
+    public int playTheRealGame(List<String> inputLines) {
+        var cards = inputLines.stream().map(this::parseLine).toList();
+        for (int i = 0; i < cards.size(); i++) {
+            var wonAmount = cards.get(i).countMatchingNumbers();
+            cards.get(i).addWonCards(cards.subList(i+1, (int) (i+wonAmount+1)));
+        } return cards.stream().mapToInt(ScratchCard::getStackSize).sum();
     }
 }
