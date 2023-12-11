@@ -7,7 +7,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class EngineSchematicSolverTest {
-    List<String> mockInput = List.of(
+    final List<String> mockInput = List.of(
             "467..114..",
             "...*......",
             "..35..633.",

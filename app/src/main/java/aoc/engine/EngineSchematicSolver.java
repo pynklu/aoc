@@ -9,11 +9,6 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class EngineSchematicSolver extends Solver {
-    //input naar 2d array
-    //input naar 2d array met visited status
-    //rij per rij symbolen zoeken
-    //symbool --> add omringende cijfers if not visited & zet visited cijfers op true
-
     private final Pattern symbolPatern = Pattern.compile("[^\\d\\.]");
     private List<String> schematic = new ArrayList<>();
     private boolean[][] visited;

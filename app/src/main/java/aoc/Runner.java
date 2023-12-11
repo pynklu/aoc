@@ -2,6 +2,7 @@ package aoc;
 
 import aoc.cube.CubeSolver;
 import aoc.engine.EngineSchematicSolver;
+import aoc.scratch.ScratchCardSolver;
 import aoc.trebuchet.CalibrationSolver;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Runner {
     public static void main(String[] args) {
         try {
-            solveDay3();
+            solveDay4();
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -36,5 +37,10 @@ public class Runner {
         solver.initialiseMatrix(lines);
         System.out.println("solver.solveSchematic() = " + solver.solveSchematic());
         System.out.println("solver.solveGearRatios() = " + solver.solveGearRatios());
+    }
+
+    private static void solveDay4() throws IOException, URISyntaxException {
+        ScratchCardSolver solver = new ScratchCardSolver();
+        System.out.println("solver.countCards() = " + solver.countCards());
     }
 }
