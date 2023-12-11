@@ -35,5 +35,6 @@ public class Runner {
         List<String> lines = solver.readFileByLine("day3.txt");
         solver.initialiseMatrix(lines);
         System.out.println("solver.solveSchematic() = " + solver.solveSchematic());
+        System.out.println("solver.solveGearRatios() = " + solver.solveGearRatios());
     }
 }

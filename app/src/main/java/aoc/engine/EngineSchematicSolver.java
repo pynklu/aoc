@@ -19,6 +19,7 @@ public class EngineSchematicSolver extends Solver {
     private boolean[][] visited;
     private int maxX = 0, maxY = 0;
     private final List<Integer> partNumbers = new ArrayList<>();
+    private final List<Integer> gearRatios = new ArrayList<>();
 
     public void initialiseMatrix(List<String> lines) {
         this.schematic = lines;
@@ -45,16 +46,21 @@ public class EngineSchematicSolver extends Solver {
     public void checkNeighboursForPosition(int x, int y) {
         var xToCheck = rangeWithMax(x, maxX);
         var yToCheck = rangeWithMax(y, maxY);
-
+        boolean isGear = '*' == (schematic.get(y).charAt(x));
+        var numbers = new ArrayList<Integer>();
         for(int xpos : xToCheck){
             for(int ypos: yToCheck){
                 if(visited[ypos][xpos] || (xpos == x && ypos == y)) continue;
                 if( Character.isDigit(schematic.get(ypos).charAt(xpos))){
-                    partNumbers.add(buildFullNumber(xpos, ypos));
+                    numbers.add(buildFullNumber(xpos, ypos));
                 }
                 visited[ypos][xpos] = true;
             }
         }
+        if(isGear && numbers.size() == 2){
+            gearRatios.add(numbers.get(0) * numbers.get(1));
+        }
+        partNumbers.addAll(numbers);
     }
 
     public int buildFullNumber(int x, int y){
@@ -79,5 +85,14 @@ public class EngineSchematicSolver extends Solver {
             }
         }
         return this.partNumbers.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public int solveGearRatios() {
+        for (int yPos = 0; yPos < schematic.size(); yPos++) {
+            for(int xPos: getSymbolsInLine(schematic.get(yPos))){
+                checkNeighboursForPosition(xPos, yPos);
+            }
+        }
+        return this.gearRatios.stream().mapToInt(Integer::intValue).sum();
     }
 }

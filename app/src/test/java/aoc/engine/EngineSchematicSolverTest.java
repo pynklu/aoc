@@ -59,4 +59,12 @@ class EngineSchematicSolverTest {
         int result = solver.solveSchematic();
         assertThat(result).isEqualTo(4361);
     }
+
+    @Test
+    void testGearRatios() {
+        EngineSchematicSolver solver = new EngineSchematicSolver();
+        solver.initialiseMatrix(mockInput);
+        int result = solver.solveGearRatios();
+        assertThat(result).isEqualTo(467835);
+    }
 }
