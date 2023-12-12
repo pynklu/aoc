@@ -3,6 +3,7 @@ package aoc;
 import aoc.cube.CubeSolver;
 import aoc.engine.EngineSchematicSolver;
 import aoc.scratch.ScratchCardSolver;
+import aoc.seeds.SeedSolver;
 import aoc.trebuchet.CalibrationSolver;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.util.List;
 public class Runner {
     public static void main(String[] args) {
         try {
-            solveDay4();
+            solveDay5();
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -44,5 +45,12 @@ public class Runner {
         var lines = solver.readFileByLine("day4.txt");
         System.out.println("solver.countCards() = " + solver.countCards(lines));
         System.out.println("solver.playTheRealGame(lines) = " + solver.playTheRealGame(lines));
+    }
+
+    private static void solveDay5() throws IOException, URISyntaxException {
+        SeedSolver solver = new SeedSolver();
+        var lines = solver.readFileByLine("day5.txt");
+        solver.parseInput(lines);
+        System.out.println("solver = " + solver.findLowestSeedLocation());
     }
 }
