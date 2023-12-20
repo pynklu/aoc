@@ -13,7 +13,10 @@ import java.util.List;
 public class Runner {
     public static void main(String[] args) {
         try {
+            long startTime = System.nanoTime();
             solveDay5();
+            long duration = (System.nanoTime() - startTime) / 1000;
+            System.out.println("Method execution in " + duration + "ms");
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -51,6 +54,6 @@ public class Runner {
         SeedSolver solver = new SeedSolver();
         var lines = solver.readFileByLine("day5.txt");
         solver.parseInput(lines);
-        System.out.println("solver = " + solver.findLowestSeedLocation());
+        System.out.println("solver.findLowestSeedRangeLocation(solver.seedRanges.get(0)) = " + solver.findLowestSeedLocation2());
     }
 }
