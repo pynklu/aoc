@@ -1,11 +1,13 @@
 package aoc;
 
+import aoc.camel.CamelCardsSolver;
 import aoc.cube.CubeSolver;
 import aoc.engine.EngineSchematicSolver;
 import aoc.races.RaceSolver;
 import aoc.scratch.ScratchCardSolver;
 import aoc.seeds.SeedSolver;
 import aoc.trebuchet.CalibrationSolver;
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,7 +17,7 @@ public class Runner {
     public static void main(String[] args) {
         try {
             long startTime = System.nanoTime();
-            solveDay6();
+            solveDay7();
             long duration = (System.nanoTime() - startTime) / 1000;
             System.out.println("Method execution in " + duration + "ms");
         } catch (IOException | URISyntaxException e) {
@@ -64,5 +66,12 @@ public class Runner {
         solver.parseInput(lines);
         System.out.println("solver.multiplyRaceOptions() = " + solver.multiplyRaceOptions());
         System.out.println("solver.countWinningOptions(solver.getBigRace()) = " + solver.countWinningOptions(solver.getBigRace()));
+    }
+
+    private static void solveDay7() throws IOException, URISyntaxException {
+        CamelCardsSolver solver = new CamelCardsSolver();
+        var lines = solver.readFileByLine("day7.txt");
+        solver.parseInput(lines);
+        System.out.println("solver.countWinnings() = " + solver.countWinnings());
     }
 }
