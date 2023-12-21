@@ -7,9 +7,6 @@ import org.junit.jupiter.api.TestInstance;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.*;
 

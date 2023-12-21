@@ -2,6 +2,7 @@ package aoc;
 
 import aoc.cube.CubeSolver;
 import aoc.engine.EngineSchematicSolver;
+import aoc.races.RaceSolver;
 import aoc.scratch.ScratchCardSolver;
 import aoc.seeds.SeedSolver;
 import aoc.trebuchet.CalibrationSolver;
@@ -14,7 +15,7 @@ public class Runner {
     public static void main(String[] args) {
         try {
             long startTime = System.nanoTime();
-            solveDay5();
+            solveDay6();
             long duration = (System.nanoTime() - startTime) / 1000;
             System.out.println("Method execution in " + duration + "ms");
         } catch (IOException | URISyntaxException e) {
@@ -55,5 +56,13 @@ public class Runner {
         var lines = solver.readFileByLine("day5.txt");
         solver.parseInput(lines);
         System.out.println("solver.findLowestSeedRangeLocation(solver.seedRanges.get(0)) = " + solver.findLowestSeedLocation2());
+    }
+    
+    private static void solveDay6() throws IOException, URISyntaxException {
+        RaceSolver solver = new RaceSolver();
+        var lines = solver.readFileByLine("day6.txt");
+        solver.parseInput(lines);
+        System.out.println("solver.multiplyRaceOptions() = " + solver.multiplyRaceOptions());
+        System.out.println("solver.countWinningOptions(solver.getBigRace()) = " + solver.countWinningOptions(solver.getBigRace()));
     }
 }
