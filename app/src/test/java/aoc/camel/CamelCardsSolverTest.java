@@ -14,6 +14,6 @@ class CamelCardsSolverTest {
         var lines = solver.readFileByLine("day7mock.txt");
         solver.parseInput(lines);
         var winnings = solver.countWinnings();
-        assertThat(winnings).isEqualTo(6440);
+        assertThat(winnings).isEqualTo(5905);
     }
 }

@@ -20,6 +20,7 @@ public class Hand implements Comparable<Hand> {
         for (int i = 0; i < hand.length(); i++) {
             var cardValue = cardToValue(hand.charAt(i));
             cards[i] = cardValue;
+            cardValue = cardValue == 11 ? 1 : cardValue + 1; //make J the weakest card
             compoundValue += (long) (cardValue * 1_00_00_00_00_00_00L / Math.pow(100,i));
         }
         return cards;
@@ -38,25 +39,44 @@ public class Hand implements Comparable<Hand> {
     }
 
     private HandType findHandType(int[] cards) {
+        HandType hand = null;
         var cardDict = new HashMap<Integer, Long>();
         for(int card : cards){
             if(cardDict.containsKey(card)) continue;
             var count = Arrays.stream(cards).filter(c -> c == card).count();
-            if (count == 4) return HandType.FOUR_OF_A_KIND;
+            if (count == 4) hand = HandType.FOUR_OF_A_KIND;
             if(count == 5) return HandType.FIVE_OF_A_KIND;
             cardDict.put(card, count);
         }
         var foundCards = cardDict.keySet().size();
-        if(foundCards == 5) {
-            return HandType.HIGH_CARD;
-        } else if (foundCards == 4) {
-            return HandType.PAIR;
-        } else if (foundCards == 3) {
-            return cardDict.containsValue(3L) ? HandType.THREE_OF_A_KIND : HandType.TWO_PAIR;
-        } else if (foundCards == 2) {
-            return HandType.FULL_HOUSE;
+        var jokerCount = cardDict.getOrDefault(11, 0L);
+
+        if(hand == null) {
+            if(foundCards == 5) {
+                hand = HandType.HIGH_CARD;
+            } else if (foundCards == 4) {
+                hand = HandType.PAIR;
+            } else if (foundCards == 3) {
+                hand = cardDict.containsValue(3L) ? HandType.THREE_OF_A_KIND : HandType.TWO_PAIR;
+            } else if (foundCards == 2) {
+                hand = HandType.FULL_HOUSE;
+            } else {
+                hand = HandType.HIGH_CARD;
+            }
         }
-        return HandType.HIGH_CARD;
+
+        return jokerCount > 0 ? applyJoker(hand, jokerCount) : hand;
+    }
+
+    private HandType applyJoker(HandType hand, long jokerCount) {
+        switch (hand) {
+            case FOUR_OF_A_KIND, FULL_HOUSE -> { return HandType.FIVE_OF_A_KIND; }
+            case THREE_OF_A_KIND -> { return HandType.FOUR_OF_A_KIND; }
+            case TWO_PAIR -> { return jokerCount == 2 ? HandType.FOUR_OF_A_KIND : HandType.FULL_HOUSE; }
+            case PAIR -> { return HandType.THREE_OF_A_KIND; }
+            case HIGH_CARD -> {return HandType.PAIR; }
+            default -> { return hand; }
+        }
     }
 
     public int getBid() { return bid; }
