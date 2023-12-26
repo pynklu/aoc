@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class Solver {
+public abstract class Solver {
     public List<String> readFileByLine(String filename) throws IOException, URISyntaxException {
         Path path = Path.of(getClass().getClassLoader().getResource(filename).toURI());
         return Files.readAllLines(path);

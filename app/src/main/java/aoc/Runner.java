@@ -7,6 +7,7 @@ import aoc.races.RaceSolver;
 import aoc.scratch.ScratchCardSolver;
 import aoc.seeds.SeedSolver;
 import aoc.trebuchet.CalibrationSolver;
+import aoc.wasteland.NavSolver;
 import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class Runner {
     public static void main(String[] args) {
         try {
             long startTime = System.nanoTime();
-            solveDay7();
+            solveDay8();
             long duration = (System.nanoTime() - startTime) / 1000;
             System.out.println("Method execution in " + duration + "ms");
         } catch (IOException | URISyntaxException e) {
@@ -73,5 +74,12 @@ public class Runner {
         var lines = solver.readFileByLine("day7.txt");
         solver.parseInput(lines);
         System.out.println("solver.countWinnings() = " + solver.countWinnings());
+    }
+    private static void solveDay8() throws IOException, URISyntaxException {
+        var solver = new NavSolver();
+        var lines = solver.readFileByLine("day8.txt");
+        solver.parseInput(lines);
+        System.out.println("solver.countSteps() = " + solver.countSteps());
+        System.out.println("solver.countSimultaneousSteps() = " + solver.countSimultaneousSteps());
     }
 }
