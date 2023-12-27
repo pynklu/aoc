@@ -73,4 +73,28 @@ class SequenceSolverTest {
     void sumNextValues() {
         assertThat(solver.sumNextValues()).isEqualTo(114);
     }
+
+    @Test
+    void getPreviousValue() {
+        var h1_0 = solver.histories.get(0);
+        var h2_0 = solver.histories.get(1);
+        var h3_0 = solver.histories.get(2);
+        var h3_1 = solver.buildDiffArray(h3_0);
+        var h3_2 = solver.buildDiffArray(h3_1);
+        var h3_3 = solver.buildDiffArray(h3_2);
+        var h3_4 = solver.buildDiffArray(h3_3);
+
+        assertThat(solver.getPreviousValue(h1_0)).isEqualTo(-3);
+        assertThat(solver.getPreviousValue(h2_0)).isEqualTo(0);
+        assertThat(solver.getPreviousValue(h3_0)).isEqualTo(5);
+        assertThat(solver.getPreviousValue(h3_1)).isEqualTo(5);
+        assertThat(solver.getPreviousValue(h3_2)).isEqualTo(-2);
+        assertThat(solver.getPreviousValue(h3_3)).isEqualTo(2);
+        assertThat(solver.getPreviousValue(h3_4)).isEqualTo(0);
+    }
+
+    @Test
+    void sumPreviousValues() {
+        assertThat(solver.sumPreviousValues()).isEqualTo(2);
+    }
 }

@@ -3,10 +3,10 @@ package aoc.wasteland;
 import java.util.Objects;
 
 public class Node {
-    private String key;
+    private final String key;
     private final Node[] neighbours = new Node[2];
-    private String left;
-    private String right;
+    private final String left;
+    private final String right;
 
     public Node(String key, String left, String right ){
         this.key = key;

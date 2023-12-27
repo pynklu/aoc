@@ -89,5 +89,6 @@ public class Runner {
         var lines = solver.readFileByLine("day9.txt");
         solver.parseInput(lines);
         System.out.println("Part 1 = " + solver.sumNextValues());
+        System.out.println("Part 2 = " + solver.sumPreviousValues());
     }
 }

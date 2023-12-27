@@ -5,7 +5,6 @@ import aoc.Solver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +14,7 @@ public class NavSolver extends Solver {
     private Direction[] directions;
     private Map<String, Node> nodes;
 
-    Pattern pattern = Pattern.compile("[A-Z0-9]{3}");
+    final Pattern pattern = Pattern.compile("[A-Z0-9]{3}");
     public void parseInput(List<String> lines) {
         this.directions = parseDirections(lines.get(0));
         this.nodes = lines.subList(2,lines.size()).stream().map(this::parseNode).collect(Collectors.toMap(Node::getKey, Function.identity()));

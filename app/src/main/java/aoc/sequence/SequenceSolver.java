@@ -23,6 +23,16 @@ public class SequenceSolver extends Solver {
         return array[array.length - 1] + delta;
     }
 
+    public long sumPreviousValues() {
+        return histories.stream().mapToLong(this::getPreviousValue).sum();
+    }
+
+    int getPreviousValue(int[] array){
+        var diffArray = buildDiffArray(array);
+        var delta = isZeroArray(diffArray) ? 0 : getPreviousValue(diffArray);
+        return array[0] - delta;
+    }
+
     int[] buildDiffArray(int[] array){
         var out = new int[array.length - 1];
         for (int i = 1; i < array.length; i++) {

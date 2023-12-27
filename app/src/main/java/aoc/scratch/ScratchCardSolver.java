@@ -25,7 +25,7 @@ public class ScratchCardSolver extends Solver {
         return Arrays.stream(s.strip().split("\\s+")).map(Integer::parseInt).toList();
     }
 
-    public double countCards(List<String> inputLines) throws IOException, URISyntaxException {
+    public double countCards(List<String> inputLines) {
         return inputLines.stream()
                 .map(this::parseLine)
                 .mapToDouble(ScratchCard::getValue)
