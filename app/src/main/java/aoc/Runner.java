@@ -3,6 +3,7 @@ package aoc;
 import aoc.camel.CamelCardsSolver;
 import aoc.cube.CubeSolver;
 import aoc.engine.EngineSchematicSolver;
+import aoc.pipe.PipeSolver;
 import aoc.races.RaceSolver;
 import aoc.scratch.ScratchCardSolver;
 import aoc.seeds.SeedSolver;
@@ -18,7 +19,7 @@ public class Runner {
     public static void main(String[] args) {
         try {
             long startTime = System.nanoTime();
-            solveDay9();
+            solveDay10();
             double duration = ((double) System.nanoTime() - startTime) / 1000_000_000;
             System.out.println("Method execution in " + duration + "s");
         } catch (IOException | URISyntaxException e) {
@@ -90,5 +91,10 @@ public class Runner {
         solver.parseInput(lines);
         System.out.println("Part 1 = " + solver.sumNextValues());
         System.out.println("Part 2 = " + solver.sumPreviousValues());
+    }
+
+    private static void solveDay10() throws IOException, URISyntaxException {
+        var solver = new PipeSolver("day10.txt");
+        System.out.println("Part 1 = " + solver.traverseLoop());
     }
 }
