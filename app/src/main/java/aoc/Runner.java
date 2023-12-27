@@ -6,9 +6,9 @@ import aoc.engine.EngineSchematicSolver;
 import aoc.races.RaceSolver;
 import aoc.scratch.ScratchCardSolver;
 import aoc.seeds.SeedSolver;
+import aoc.sequence.SequenceSolver;
 import aoc.trebuchet.CalibrationSolver;
 import aoc.wasteland.NavSolver;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,9 +18,9 @@ public class Runner {
     public static void main(String[] args) {
         try {
             long startTime = System.nanoTime();
-            solveDay8();
-            long duration = (System.nanoTime() - startTime) / 1000;
-            System.out.println("Method execution in " + duration + "ms");
+            solveDay9();
+            double duration = ((double) System.nanoTime() - startTime) / 1000_000_000;
+            System.out.println("Method execution in " + duration + "s");
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -75,11 +75,19 @@ public class Runner {
         solver.parseInput(lines);
         System.out.println("solver.countWinnings() = " + solver.countWinnings());
     }
+
     private static void solveDay8() throws IOException, URISyntaxException {
         var solver = new NavSolver();
         var lines = solver.readFileByLine("day8.txt");
         solver.parseInput(lines);
         System.out.println("solver.countSteps() = " + solver.countSteps());
         System.out.println("solver.countSimultaneousSteps() = " + solver.countSimultaneousSteps());
+    }
+
+    private static void solveDay9() throws IOException, URISyntaxException {
+        var solver = new SequenceSolver();
+        var lines = solver.readFileByLine("day9.txt");
+        solver.parseInput(lines);
+        System.out.println("Part 1 = " + solver.sumNextValues());
     }
 }
